@@ -29,8 +29,8 @@ CREATE TABLE TB_Dependente
          Nome                                           VARCHAR(100) NOT NULL,
          Data_Nascimento                                DATE NOT NULL,
          Cpf_Cliente                                    CHAR(11) NOT NULL,
-         FOREIGN KEY (Cpf_Cliente)                      REFERENCES TB_Cliente (Cpf),
-         PRIMARY KEY (Cpf)
+         PRIMARY KEY (Cpf, Cpf_Cliente),
+         FOREIGN KEY (Cpf_Cliente) REFERENCES TB_Cliente(Cpf)
 );
 
 CREATE TABLE TB_Funcionario

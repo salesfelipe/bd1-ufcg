@@ -16,6 +16,8 @@ CREATE TABLE "Dependente"
          "CPF"                               CHAR(11) NOT NULL,
          "Nome"                              VARCHAR(100) NOT NULL,
          "Data_Nascimento"                   DATE NOT NULL,
+         "CPF_Cliente"                       CHAR (11),
+         FOREIGN KEY ("CPF_Cliente")         REFERENCES "Cliente"("CPF"),
          PRIMARY KEY ("CPF")
 );
 
@@ -24,14 +26,14 @@ CREATE TABLE "Funcionario"
          "CPF"                              CHAR(11) NOT NULL,
          "Nome"                             VARCHAR(100) NOT NULL,
          "Data_Nascimento"                  DATE NOT NULL,
-         "Funcao"                           VARCHAR2(100) NOT NULL,
-         "Salario"                          NUMBER NOT NULL,
+         "Funcao"                           VARCHAR(100) NOT NULL,
+         "Salario"                          NUMBER(8,2) NOT NULL,
          PRIMARY KEY ("CPF")
 );
 
 CREATE TABLE "Quarto"
 (
-         "QuartoId"                                      NUMBER NOT NULL,
+         "QuartoId"                                      NUMBER(3,0) NOT NULL,
          "Numero"                                        VARCHAR(4)  NOT NULL,
          "Tipo"                                          VARCHAR(25) NOT NULL,
          "Vista"                                         VARCHAR(25) NOT NULL,

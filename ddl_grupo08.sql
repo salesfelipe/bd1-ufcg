@@ -9,7 +9,7 @@ CREATE TABLE TB_Cliente
     FOREIGN KEY (Endereco_Id) REFERENCES TB_Endereco (Id)
 );
 
-CREATE TABLE Tb_Endereco
+CREATE TABLE TB_Endereco
 (
     Id INT NOT NULL,
     Rua VARCHAR(50) NOT NULL,
@@ -19,35 +19,24 @@ CREATE TABLE Tb_Endereco
     PRIMARY KEY (Id)
 );
 
-CREATE TABLE tb_dependente
-
+CREATE TABLE TB_Dependente
 (
-
-    nome VARCHAR (15) NOT NULL,
-
-    cpf char (9),
-
-    cpf_cliente char (9),
-
-    PRIMARY KEY (cpf, cpf_cliente),
-
-    FOREIGN KEY (cpf_cliente) REFERENCES tb_cliente(cpf),
-
-    data_de_nascimento DATE NOT NULL
+    Nome VARCHAR (100) NOT NULL,
+    Cpf CHAR(11) NOT NULL,
+    Cpf_Cliente CHAR(11) NOT NULL,
+    Data_Nascimento DATE NOT NULL,
+    PRIMARY KEY (Cpf, Cpf_Cliente),
+    FOREIGN KEY (Cpf_Cliente) REFERENCES TB_Cliente(Cpf),
 
   );
 
-CREATE TABLE tb_funcionario
+CREATE TABLE TB_Funcionario
 (
-    nome VARCHAR(15) NOT NULL,
-
-    cpf char(9),
-
-    PRIMARY KEY(cpf),
-
-    salario FLOAT(3),
-
-    data_de_nascimento DATE NOT NULL,
-
-    funcao VARCHAR(15) NOT NULL
+    Nome VARCHAR(100) NOT NULL,
+    Cpf CHAR(11) NOT NULL,
+    Salario DECIMAL(8,2) NOT NULL,
+    Data_Nascimento DATE NOT NULL,
+    Funcao_Id INT NOT NULL,
+    PRIMARY KEY(Cpf),
+    FOREIGN KEY (Funcao_Id) REFERENCES TB_Funcao(Id)
 );

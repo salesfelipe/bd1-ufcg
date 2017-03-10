@@ -28,7 +28,7 @@ CREATE TABLE TB_Dependente
     PRIMARY KEY (Cpf, Cpf_Cliente),
     FOREIGN KEY (Cpf_Cliente) REFERENCES TB_Cliente(Cpf),
 
-  );
+);
 
 CREATE TABLE TB_Funcionario
 (
@@ -39,4 +39,12 @@ CREATE TABLE TB_Funcionario
     Funcao_Id INT NOT NULL,
     PRIMARY KEY(Cpf),
     FOREIGN KEY (Funcao_Id) REFERENCES TB_Funcao(Id)
+);
+
+CREATE TABLE TB_Funcao
+(
+  Id INT NOT NULL,
+  Nome VARCHAR(25) NOT NULL,
+  PRIMARY KEY (Id),
+  UNIQUE (Nome)
 );

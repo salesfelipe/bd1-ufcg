@@ -15,7 +15,7 @@ CREATE TABLE TB_Cliente
          PRIMARY KEY (Cpf)
 );
 
-CREATE TABLE TB_TELEFONE
+CREATE TABLE TB_Telefone
 (
          Id                                             INT NOT NULL,
          Numero                                         CHAR(13) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE TB_TELEFONE
          UNIQUE (Numero)
 );
 
-CREATE TABLE TB_TELEFONE_CLIENTE
+CREATE TABLE TB_Telefone_Cliente
 (
          Id_Telefone                                    INT NOT NULL,
          Cpf_Cliente                                    INT NOT NULL,

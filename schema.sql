@@ -45,15 +45,6 @@ CREATE TABLE  quarto
           PRIMARY KEY ( quarto_id )
 );
 
-CREATE TABLE  produto
-(
-          produto_id                                   NUMBER NOT NULL,
-          nome                                         VARCHAR(100)  NOT NULL,
-          descricao                                    VARCHAR(100) NOT NULL,
-          valor                                        NUMBER(8,2) NOT NULL,
-          PRIMARY KEY ( produto_id )
-);
-
 CREATE TABLE  reserva
 (
           reserva_id                                   NUMBER NOT NULL,
@@ -97,6 +88,81 @@ CREATE TABLE  avaliacao
           PRIMARY KEY ( avaliacao_id )
 );
 
+
+CREATE TABLE  alocacao
+(
+          funcionario_cpf                              CHAR(11) NOT NULL,
+          servico_id                                   NUMBER(3) NOT NULL,
+          FOREIGN KEY ( funcionario_cpf )              REFERENCES  funcionario ( cpf ),
+          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
+          PRIMARY KEY ( funcionario_cpf , servico_id )
+);
+
+CREATE TABLE passeio_turistico
+(
+        passeio_id                                     NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( passeio_id )
+);
+
+CREATE TABLE lavanderia
+(
+        lavanderia_id                                  NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( lavanderia_id )
+);
+
+CREATE TABLE frigobar
+(
+        frigobar_id                                    NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( frigobar_id )
+);
+
+CREATE TABLE restaurante
+(
+        restaurante_id                                 NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( restaurante_id )
+);
+
+CREATE TABLE estacionamento
+(
+        estacionamento_id                                  NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( estacionamento_id )
+);
+
+CREATE TABLE bar
+(
+        bar_id                                         NUMBER NOT NULL,
+        servico_id                                     NUMBER NOT NULL,
+        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
+        PRIMARY KEY ( bar_id )
+);
+
+CREATE TABLE  produto
+(
+          produto_id                                   NUMBER NOT NULL,
+          nome                                         VARCHAR(100)  NOT NULL,
+          descricao                                    VARCHAR(100) NOT NULL,
+          valor                                        NUMBER(8,2) NOT NULL,
+          lavanderia_id                                NUMBER,
+          frigobar_id                                  NUMBER,
+          restaurante_id                               NUMBER,
+          bar_id                                       NUMBER,
+          FOREIGN KEY ( lavanderia_id )                REFERENCES  lavanderia ( lavanderia_id ),
+          FOREIGN KEY ( frigobar_id )                  REFERENCES  frigobar ( frigobar_id ),
+          FOREIGN KEY ( restaurante_id )               REFERENCES  restaurante ( restaurante_id ),
+          FOREIGN KEY ( bar_id )                       REFERENCES  bar ( bar_id ),
+          PRIMARY KEY ( produto_id )
+);
+
 CREATE TABLE  venda
 (
           venda_id                                     NUMBER,
@@ -107,13 +173,4 @@ CREATE TABLE  venda
           FOREIGN KEY ( produto_id )                   REFERENCES  produto ( produto_id ),
           FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
           PRIMARY KEY ( venda_id )
-);
-
-CREATE TABLE  alocacao
-(
-          funcionario_cpf                              CHAR(11) NOT NULL,
-          servico_id                                   NUMBER(3) NOT NULL,
-          FOREIGN KEY ( funcionario_cpf )              REFERENCES  funcionario ( cpf ),
-          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
-          PRIMARY KEY ( funcionario_cpf , servico_id )
 );

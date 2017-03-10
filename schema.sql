@@ -18,7 +18,7 @@ CREATE TABLE TB_Cliente
 CREATE TABLE TB_Telefone_Cliente
 (
          Numero_Telefone                                CHAR(13) NOT NULL,
-         Cpf_Cliente                                    INT NOT NULL,
+         Cpf_Cliente                                    CHAR(11) NOT NULL,
          FOREIGN KEY (Cpf_Cliente)                      REFERENCES TB_Cliente (Cpf),
          PRIMARY KEY (Numero_Telefone, Cpf_Cliente)
 );

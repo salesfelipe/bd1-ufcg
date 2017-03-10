@@ -105,7 +105,7 @@ CREATE TABLE TB_Avaliacao
 );
 
 
-CREATE TABLE TB_Servico_Prestado_Funcionario
+CREATE TABLE TB_Alocacao_Funcionario
 (
           Funcionario_Cpf                              CHAR(11) NOT NULL,
           Servico_Id                                   INT NOT NULL,

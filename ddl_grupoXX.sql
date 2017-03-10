@@ -1,22 +1,23 @@
-CREATE TABLE tb_cliente
-
+CREATE TABLE TB_Cliente
 (
+    Cpf VARCHAR(11) NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Data_Nascimento DATE NOT NULL,
+    Sexo CHAR NOT NULL,
+    Endereco_Id INT NOT NULL,
+    PRIMARY KEY (Cpf),
+    FOREIGN KEY (Endereco_Id) REFERENCES TB_Endereco (Id)
+);
 
-    nome VARCHAR (15) NOT NULL,
-
-    cpf char (9),
-
-    PRIMARY KEY (cpf),
-    
-    id_endereco INT,
-    
-    FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco),
-
-    data_de_nascimento DATE NOT NULL,
-
-    sexo CHAR
-  );
-
+CREATE TABLE Tb_Endereco
+(
+    Id INT NOT NULL,
+    Rua VARCHAR(50) NOT NULL,
+    Numero CHAR(10) NOT NULL,
+    Bairro VARCHAR(15) NOT NULL,
+    Cep CHAR(8) NOT NULL,
+    PRIMARY KEY (Id)
+);
 
 CREATE TABLE tb_dependente
 
@@ -35,22 +36,6 @@ CREATE TABLE tb_dependente
     data_de_nascimento DATE NOT NULL
 
   );
-
-CREATE TABLE tb_endereco
-
-(
-    id_endereco INT,
-    
-    PRIMARY KEY (id_endereco),
-    
-    rua VARCHAR(25) NOT NULL,
-    
-    bairro VARCHAR(25) NOT NULL,
-    
-    cep INT NOT NULL,
-    
-    numero INT NOT NULL
-);
 
 CREATE TABLE tb_funcionario
 (

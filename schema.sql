@@ -1,176 +1,192 @@
 /* Arquivo de criação das entidades principais do sistema! */
 
-CREATE TABLE cliente
+
+CREATE TABLE TB_Cliente
 (
-         cpf                                            CHAR(11) NOT NULL,
+         Cpf                                            CHAR(11) NOT NULL,
          Nome                                           VARCHAR(100) NOT NULL,
-         data_nascimento                                DATE NOT NULL,
-         sexo                                           CHAR NOT NULL,
-         email                                          VARCHAR(25) NOT NULL,
-         rua                                            VARCHAR(50) NOT NULL,
-         numero                                         VARCHAR(10) NOT NULL,
-         bairro                                         VARCHAR(20) NOT NULL,
-         cep                                            CHAR (8),
-         PRIMARY KEY ( cpf )
+         Data_Nascimento                                DATE NOT NULL,
+         Sexo                                           CHAR NOT NULL,
+         Email                                          VARCHAR(25) NOT NULL,
+         Rua                                            VARCHAR(50) NOT NULL,
+         Numero                                         CHAR(10) NOT NULL,
+         Bairro                                         VARCHAR(20) NOT NULL,
+         Cep                                            CHAR(8),
+         PRIMARY KEY (Cpf)
 );
 
-CREATE TABLE  dependente
+CREATE TABLE TB_TELEFONE
 (
-         cpf                                            CHAR(11) NOT NULL,
-         nome                                           VARCHAR(100) NOT NULL,
-         data_nascimento                                DATE NOT NULL,
-         cpf_cliente                                    CHAR (11) NOT NULL,
-         FOREIGN KEY ( cpf_cliente )                    REFERENCES  cliente ( cpf ),
-         PRIMARY KEY ( cpf )
+         Id                                             INT NOT NULL,
+         Numero                                         CHAR(13) NOT NULL,
+         PRIMARY KEY (Id),
+         UNIQUE (Numero)
 );
 
-CREATE TABLE  funcionario
+CREATE TABLE TB_TELEFONE_CLIENTE
 (
-         cpf                                           CHAR(11) NOT NULL,
-         nome                                          VARCHAR(100) NOT NULL,
-         data_nascimento                               DATE NOT NULL,
-         funcao                                        VARCHAR(100) NOT NULL,
-         salario                                       NUMBER(8,2) NOT NULL,
-         PRIMARY KEY ( cpf )
+         Id_Telefone                                    INT NOT NULL,
+         Cpf_Cliente                                    INT NOT NULL,
+         PRIMARY KEY (Id_Telefone, Cpf_Cliente)
 );
 
-CREATE TABLE  quarto
+CREATE TABLE TB_Dependente
 (
-          quarto_id                                    NUMBER NOT NULL,
-          numero                                       VARCHAR(4)  NOT NULL,
-          tipo                                         VARCHAR(25) NOT NULL,
-          vista                                        VARCHAR(25) NOT NULL,
-          equipamentos                                 VARCHAR(150) NOT NULL,
-          diaria                                       NUMBER(8,2) NOT NULL,
-          PRIMARY KEY ( quarto_id )
+         Cpf                                            CHAR(11) NOT NULL,
+         Nome                                           VARCHAR(100) NOT NULL,
+         Data_Nascimento                                DATE NOT NULL,
+         Cpf_Cliente                                    CHAR(11) NOT NULL,
+         FOREIGN KEY (Cpf_Cliente)                      REFERENCES TB_Cliente (Cpf),
+         PRIMARY KEY (Cpf)
 );
 
-CREATE TABLE  reserva
+CREATE TABLE TB_Funcionario
 (
-          reserva_id                                   NUMBER NOT NULL,
-          data_inicio                                  DATE NOT NULL,
-          data_fim                                     DATE  NOT NULL,
-          cpf_cliente                                  CHAR(11) NOT NULL,
-          quarto_id                                    NUMBER NOT NULL,
-          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
-          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
-          PRIMARY KEY ( reserva_id )
+         Cpf                                           CHAR(11) NOT NULL,
+         Nome                                          VARCHAR(100) NOT NULL,
+         Data_Nascimento                               DATE NOT NULL,
+         Funcao                                        VARCHAR(100) NOT NULL,
+         Salario                                       DECIMAL(8,2) NOT NULL,
+         PRIMARY KEY (Cpf)
 );
 
-CREATE TABLE  hospedagem
+CREATE TABLE TB_Quarto
 (
-          hospedagem_id                                NUMBER NOT NULL,
-          data_inicio                                  DATE NOT NULL,
-          data_fim                                     DATE  NOT NULL,
-          cpf_cliente                                  CHAR(11) NOT NULL,
-          quarto_id                                    NUMBER NOT NULL,
-          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
-          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
-          PRIMARY KEY ( hospedagem_id )
+          Id                                           INT NOT NULL,
+          Numero                                       CHAR(4)  NOT NULL,
+          Tipo                                         VARCHAR(25) NOT NULL,
+          Vista                                        VARCHAR(25) NOT NULL,
+          Equipamentos                                 VARCHAR(150) NOT NULL,
+          Diaria                                       DECIMAL(8,2) NOT NULL,
+          PRIMARY KEY (Id)
 );
 
-CREATE TABLE servico
+CREATE TABLE TB_Reserva
 (
-          servico_id                                   NUMBER NOT NULL,
-          valor                                        NUMBER(8,2) NOT NULL,
-          PRIMARY KEY ( servico_id )
+          Id                                           INT NOT NULL,
+          Data_Inicio                                  DATE NOT NULL,
+          Data_Fim                                     DATE  NOT NULL,
+          Cpf_Cliente                                  CHAR(11) NOT NULL,
+          Quarto_Id                                    INT NOT NULL,
+          FOREIGN KEY (Cpf_Cliente)                    REFERENCES TB_Cliente (Cpf),
+          FOREIGN KEY (Quarto_Id)                      REFERENCES TB_Quarto (Id),
+          PRIMARY KEY (Id)
 );
 
-CREATE TABLE  avaliacao
+CREATE TABLE TB_Hospedagem
 (
-          avaliacao_id                                 NUMBER NOT NULL,
-          nota                                         NUMBER NOT NULL,
-          comentario                                   VARCHAR(100),
-          cpf_cliente                                  CHAR(11) NOT NULL,
-          servico_id                                   NUMBER NOT NULL,
-          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
-          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
-          PRIMARY KEY ( avaliacao_id )
+          Id                                           INT NOT NULL,
+          Data_Inicio                                  DATE NOT NULL,
+          Data_Fim                                     DATE NOT NULL,
+          Cpf_Cliente                                  CHAR(11) NOT NULL,
+          Quarto_Id                                    INT NOT NULL,
+          FOREIGN KEY (Cpf_Cliente)                    REFERENCES TB_Cliente (Cpf),
+          FOREIGN KEY (Quarto_Id)                      REFERENCES TB_Quarto (Id),
+          PRIMARY KEY (Id)
+);
+
+CREATE TABLE TB_Servico
+(
+          Id                                           INT NOT NULL,
+          Valor                                        DECIMAL(8,2) NOT NULL,
+          PRIMARY KEY (Id)
+);
+
+CREATE TABLE TB_Avaliacao
+(
+          Id                                           INT NOT NULL,
+          Nota                                         INT NOT NULL,
+          Comentario                                   VARCHAR(100),
+          Cpf_Cliente                                  CHAR(11) NOT NULL,
+          Servico_Id                                   INT NOT NULL,
+          FOREIGN KEY (Cpf_Cliente)                    REFERENCES TB_Cliente (Cpf),
+          FOREIGN KEY (Servico_Id)                     REFERENCES TB_Servico (Id),
+          PRIMARY KEY (Id)
 );
 
 
-CREATE TABLE  alocacao
+CREATE TABLE TB_Alocacao
 (
-          funcionario_cpf                              CHAR(11) NOT NULL,
-          servico_id                                   NUMBER(3) NOT NULL,
-          FOREIGN KEY ( funcionario_cpf )              REFERENCES  funcionario ( cpf ),
-          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
-          PRIMARY KEY ( funcionario_cpf , servico_id )
+          Funcionario_Cpf                              CHAR(11) NOT NULL,
+          Servico_Id                                   INT NOT NULL,
+          FOREIGN KEY (Funcionario_Cpf)                REFERENCES TB_Funcionario (Cpf),
+          FOREIGN KEY (Servico_Id)                     REFERENCES TB_Servico (Id),
+          PRIMARY KEY (Funcionario_Cpf , Servico_Id)
 );
 
-CREATE TABLE passeio_turistico
+CREATE TABLE TB_Passeio_Turistico
 (
-        passeio_id                                     NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( passeio_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE lavanderia
+CREATE TABLE TB_Lavanderia
 (
-        lavanderia_id                                  NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( lavanderia_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE frigobar
+CREATE TABLE TB_Frigobar
 (
-        frigobar_id                                    NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( frigobar_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE restaurante
+CREATE TABLE TB_Restaurante
 (
-        restaurante_id                                 NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( restaurante_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE estacionamento
+CREATE TABLE TB_Estacionamento
 (
-        estacionamento_id                                  NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( estacionamento_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE bar
+CREATE TABLE TB_Bar
 (
-        bar_id                                         NUMBER NOT NULL,
-        servico_id                                     NUMBER NOT NULL,
-        FOREIGN KEY ( servico_id )                     REFERENCES  servico ( servico_id ),
-        PRIMARY KEY ( bar_id )
+        Id                                             INT NOT NULL,
+        Servico_Id                                     INT NOT NULL,
+        FOREIGN KEY (Servico_Id)                       REFERENCES TB_Servico (Id),
+        PRIMARY KEY (Id)
 );
 
-CREATE TABLE  produto
+CREATE TABLE TB_Produto
 (
-          produto_id                                   NUMBER NOT NULL,
-          nome                                         VARCHAR(100)  NOT NULL,
-          descricao                                    VARCHAR(100) NOT NULL,
-          valor                                        NUMBER(8,2) NOT NULL,
-          lavanderia_id                                NUMBER,
-          frigobar_id                                  NUMBER,
-          restaurante_id                               NUMBER,
-          bar_id                                       NUMBER,
-          FOREIGN KEY ( lavanderia_id )                REFERENCES  lavanderia ( lavanderia_id ),
-          FOREIGN KEY ( frigobar_id )                  REFERENCES  frigobar ( frigobar_id ),
-          FOREIGN KEY ( restaurante_id )               REFERENCES  restaurante ( restaurante_id ),
-          FOREIGN KEY ( bar_id )                       REFERENCES  bar ( bar_id ),
-          PRIMARY KEY ( produto_id )
+          Id                                           INT NOT NULL,
+          Nome                                         VARCHAR(100)  NOT NULL,
+          Descricao                                    VARCHAR(100) NOT NULL,
+          Valor                                        DECIMAL(8,2) NOT NULL,
+          Lavanderia_Id                                INT,
+          Frigobar_Id                                  INT,
+          Restaurante_Id                               INT,
+          Bar_Id                                       INT,
+          FOREIGN KEY (Lavanderia_Id)                  REFERENCES TB_Lavanderia (Id),
+          FOREIGN KEY (Frigobar_Id)                    REFERENCES TB_Frigobar (Id),
+          FOREIGN KEY (Restaurante_Id)                REFERENCES TB_Restaurante (Id),
+          FOREIGN KEY (Bar_Id )                       REFERENCES TB_Bar (Id),
+          PRIMARY KEY (Id)
 );
 
-CREATE TABLE  venda
+CREATE TABLE TB_Venda
 (
-          venda_id                                     NUMBER,
-          data                                         DATE NOT NULL,
-          quantidade                                   NUMBER NOT NULL,
-          produto_id                                   NUMBER NOT NULL,
-          quarto_id                                    NUMBER NOT NULL,
-          FOREIGN KEY ( produto_id )                   REFERENCES  produto ( produto_id ),
-          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
-          PRIMARY KEY ( venda_id )
+          Id                                           INT,
+          Data                                         DATE NOT NULL,
+          Quantidade                                   INT NOT NULL,
+          Produto_Id                                   INT NOT NULL,
+          Quarto_Id                                    INT NOT NULL,
+          FOREIGN KEY (Produto_Id)                     REFERENCES TB_Produto (Id),
+          FOREIGN KEY (Quarto_Id)                      REFERENCES TB_Quarto (Id),
+          PRIMARY KEY (Id)
 );

@@ -15,19 +15,12 @@ CREATE TABLE TB_Cliente
          PRIMARY KEY (Cpf)
 );
 
-CREATE TABLE TB_Telefone
-(
-         Id                                             INT NOT NULL,
-         Numero                                         CHAR(13) NOT NULL,
-         PRIMARY KEY (Id),
-         UNIQUE (Numero)
-);
-
 CREATE TABLE TB_Telefone_Cliente
 (
-         Id_Telefone                                    INT NOT NULL,
+         Numero_Telefone                                CHAR(13) NOT NULL,
          Cpf_Cliente                                    INT NOT NULL,
-         PRIMARY KEY (Id_Telefone, Cpf_Cliente)
+         FOREIGN KEY (Cpf_Cliente)                      REFERENCES TB_Cliente (Cpf),
+         PRIMARY KEY (Numero_Telefone, Cpf_Cliente)
 );
 
 CREATE TABLE TB_Dependente
@@ -36,8 +29,8 @@ CREATE TABLE TB_Dependente
          Nome                                           VARCHAR(100) NOT NULL,
          Data_Nascimento                                DATE NOT NULL,
          Cpf_Cliente                                    CHAR(11) NOT NULL,
-         FOREIGN KEY (Cpf_Cliente)                      REFERENCES TB_Cliente (Cpf),
-         PRIMARY KEY (Cpf)
+         PRIMARY KEY (Cpf, Cpf_Cliente),
+         FOREIGN KEY (Cpf_Cliente) REFERENCES TB_Cliente(Cpf)
 );
 
 CREATE TABLE TB_Funcionario
@@ -56,9 +49,16 @@ CREATE TABLE TB_Quarto
           Numero                                       CHAR(4)  NOT NULL,
           Tipo                                         VARCHAR(25) NOT NULL,
           Vista                                        VARCHAR(25) NOT NULL,
-          Equipamentos                                 VARCHAR(150) NOT NULL,
           Diaria                                       DECIMAL(8,2) NOT NULL,
           PRIMARY KEY (Id)
+);
+
+CREATE TABLE TB_Equipamento_Quarto
+(
+          Nome_Equipamento                             VARCHAR(150) NOT NULL,
+          Quarto_Id                                    INT NOT NULL,
+          FOREIGN KEY (Quarto_Id)                      REFERENCES TB_Quarto(Id),
+          PRIMARY KEY (Quarto_Id, Nome_Equipamento)
 );
 
 CREATE TABLE TB_Reserva
@@ -105,7 +105,7 @@ CREATE TABLE TB_Avaliacao
 );
 
 
-CREATE TABLE TB_Alocacao
+CREATE TABLE TB_Servico_Prestado_Funcionario
 (
           Funcionario_Cpf                              CHAR(11) NOT NULL,
           Servico_Id                                   INT NOT NULL,

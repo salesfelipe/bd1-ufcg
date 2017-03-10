@@ -1,109 +1,119 @@
 /* Arquivo de criação das entidades principais do sistema! */
 
-CREATE TABLE "Cliente"
+CREATE TABLE cliente
 (
-         "CPF"                                          CHAR(11) NOT NULL,
-         "Nome"                                         VARCHAR(100) NOT NULL,
-         "Data_Nascimento"                              DATE NOT NULL,
-         "Sexo"                                         CHAR NOT NULL,
-         "Email"                                        VARCHAR(25) NOT NULL,
-         "Endereco_Id"                                  NUMBER NOT NULL,
-         PRIMARY KEY ("CPF")
-         FOREIGN KEY ("Endereco_Id")                    REFERENCES "Endereco"("Endereco_Id"),
+         cpf                                            CHAR(11) NOT NULL,
+         Nome                                           VARCHAR(100) NOT NULL,
+         data_nascimento                                DATE NOT NULL,
+         sexo                                           CHAR NOT NULL,
+         email                                          VARCHAR(25) NOT NULL,
+         rua                                            VARCHAR(50) NOT NULL,
+         numero                                         VARCHAR(10) NOT NULL,
+         bairro                                         VARCHAR(20) NOT NULL,
+         cep                                            CHAR (8),
+         PRIMARY KEY ( cpf )
 );
 
-CREATE TABLE "Endereco"
+CREATE TABLE  dependente
 (
-        "Endereco_Id"                                    NUMBER
-         "Rua"                                           VARCHAR(50) NOT NULL,
-         "Numero"                                        VARCHAR(10) NOT NULL,
-         "Bairro"                                        VARCHAR(20) NOT NULL,
-         "Cep"                                           CHAR (8),
-         PRIMARY KEY ("Endereco_Id")
+         cpf                                            CHAR(11) NOT NULL,
+         nome                                           VARCHAR(100) NOT NULL,
+         data_nascimento                                DATE NOT NULL,
+         cpf_cliente                                    CHAR (11) NOT NULL,
+         FOREIGN KEY ( cpf_cliente )                    REFERENCES  cliente ( cpf ),
+         PRIMARY KEY ( cpf )
 );
 
-
-CREATE TABLE "Dependente"
+CREATE TABLE  funcionario
 (
-         "CPF"                                           CHAR(11) NOT NULL,
-         "Nome"                                          VARCHAR(100) NOT NULL,
-         "Data_Nascimento"                               DATE NOT NULL,
-         "CPF_Cliente"                                   CHAR (11),
-         FOREIGN KEY ("CPF_Cliente")                     REFERENCES "Cliente"("CPF"),
-         PRIMARY KEY ("CPF")
+         cpf                                           CHAR(11) NOT NULL,
+         nome                                          VARCHAR(100) NOT NULL,
+         data_nascimento                               DATE NOT NULL,
+         funcao                                        VARCHAR(100) NOT NULL,
+         salario                                       NUMBER(8,2) NOT NULL,
+         PRIMARY KEY ( cpf )
 );
 
-CREATE TABLE "Funcionario"
+CREATE TABLE  quarto
 (
-         "CPF"                                          CHAR(11) NOT NULL,
-         "Nome"                                         VARCHAR(100) NOT NULL,
-         "Data_Nascimento"                              DATE NOT NULL,
-         "Funcao"                                       VARCHAR(100) NOT NULL,
-         "Salario"                                      NUMBER(8,2) NOT NULL,
-         PRIMARY KEY ("CPF")
+          quarto_id                                    NUMBER NOT NULL,
+          numero                                       VARCHAR(4)  NOT NULL,
+          tipo                                         VARCHAR(25) NOT NULL,
+          vista                                        VARCHAR(25) NOT NULL,
+          equipamentos                                 VARCHAR(150) NOT NULL,
+          diaria                                       NUMBER(8,2) NOT NULL,
+          PRIMARY KEY ( quarto_id )
 );
 
-CREATE TABLE "Quarto"
+CREATE TABLE  produto
 (
-         "Quarto_Id"                                                 NUMBER(3) NOT NULL,
-         "Numero"                                                    VARCHAR(4)  NOT NULL,
-         "Tipo"                                                      VARCHAR(25) NOT NULL,
-         "Vista"                                                     VARCHAR(25) NOT NULL,
-         "Equipamentos"                                              VARCHAR(150) NOT NULL,
-         "Diaria"                                                    NUMBER(8,2) NOT NULL,
-         PRIMARY KEY ("Quarto_Id")
+          produto_id                                   NUMBER NOT NULL,
+          nome                                         VARCHAR(100)  NOT NULL,
+          descricao                                    VARCHAR(100) NOT NULL,
+          valor                                        NUMBER(8,2) NOT NULL,
+          PRIMARY KEY ( produto_id )
 );
 
-CREATE TABLE "Produto"
+CREATE TABLE  reserva
 (
-         "Produto_Id"                                                 NUMBER NOT NULL,
-         "Nome"                                                       VARCHAR(100)  NOT NULL,
-         "Descricao"                                                  VARCHAR(100) NOT NULL,
-         "Valor"                                                      NUMBER(8,2) NOT NULL,
-         PRIMARY KEY ("Produto_Id")
-)
+          reserva_id                                   NUMBER NOT NULL,
+          data_inicio                                  DATE NOT NULL,
+          data_fim                                     DATE  NOT NULL,
+          cpf_cliente                                  CHAR(11) NOT NULL,
+          quarto_id                                    NUMBER NOT NULL,
+          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
+          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
+          PRIMARY KEY ( reserva_id )
+);
 
-CREATE TABLE "Reserva"
+CREATE TABLE  hospedagem
 (
-         "Data_Inicio"                                                 DATE NOT NULL,
-         "Data_Fim"                                                    DATE  NOT NULL,
-         "Cliente_CPF"                                                 CHAR(11) NOT NULL,
-         "Quarto_Id"                                                   NUMBER(3) NOT NULL,
-         PRIMARY KEY ("Cliente_CPF","Quarto_Id")
-)
+          hospedagem_id                                NUMBER NOT NULL,
+          data_inicio                                  DATE NOT NULL,
+          data_fim                                     DATE  NOT NULL,
+          cpf_cliente                                  CHAR(11) NOT NULL,
+          quarto_id                                    NUMBER NOT NULL,
+          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
+          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
+          PRIMARY KEY ( hospedagem_id )
+);
 
-CREATE TABLE "Hospedagem"
+CREATE TABLE servico
 (
-         "Data_Inicio"                                                 DATE NOT NULL,
-         "Data_Fim"                                                    DATE  NOT NULL,
-         "Cliente_CPF"                                                 CHAR(11) NOT NULL,
-         "Quarto_Id"                                                   NUMBER NOT NULL,
-         PRIMARY KEY ("Cliente_CPF","Quarto_Id")
-)
+          servico_id                                   NUMBER NOT NULL,
+          valor                                        NUMBER(8,2) NOT NULL,
+          PRIMARY KEY ( servico_id )
+);
 
-CREATE TABLE "Avaliacao"
+CREATE TABLE  avaliacao
 (
-         "Nota"                                                        NUMBER(2) NOT NULL,
-         "Comentario"                                                  VARCHAR(100),
-         "Cliente_CPF"                                                 CHAR(11) NOT NULL,
-         "Servico_Id"                                                  NUMBER(1) NOT NULL,
-         PRIMARY KEY ("Cliente_CPF","Servico_Id")
-)
+          avaliacao_id                                 NUMBER NOT NULL,
+          nota                                         NUMBER NOT NULL,
+          comentario                                   VARCHAR(100),
+          cpf_cliente                                  CHAR(11) NOT NULL,
+          servico_id                                   NUMBER NOT NULL,
+          FOREIGN KEY ( cpf_cliente )                  REFERENCES  cliente ( cpf ),
+          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
+          PRIMARY KEY ( avaliacao_id )
+);
 
-/* Vou nem fazer propaganda mai! */
-
-CREATE TABLE "Venda"
+CREATE TABLE  venda
 (
-         "Data"                                                        DATE NOT NULL,
-         "Quantidade"                                                  NUMBER NOT NULL,
-         "Produto_Id"                                                  NUMBER NOT NULL,
-         "Quarto_Id"                                                   NUMBER(3) NOT NULL,
-         PRIMARY KEY ("Produto_Id","Quarto_Id")
-)
+          venda_id                                     NUMBER,
+          data                                         DATE NOT NULL,
+          quantidade                                   NUMBER NOT NULL,
+          produto_id                                   NUMBER NOT NULL,
+          quarto_id                                    NUMBER NOT NULL,
+          FOREIGN KEY ( produto_id )                   REFERENCES  produto ( produto_id ),
+          FOREIGN KEY ( quarto_id )                    REFERENCES  quarto ( quarto_id ),
+          PRIMARY KEY ( venda_id )
+);
 
-CREATE TABLE "Alocacao"
+CREATE TABLE  alocacao
 (
-         "Funcionario_CPF"                                             CHAR(11) NOT NULL,
-         "Servico_Id"                                                  NUMBER(3) NOT NULL,
-         PRIMARY KEY ("Funcionario_CPF","Servico_Id")
-)
+          funcionario_cpf                              CHAR(11) NOT NULL,
+          servico_id                                   NUMBER(3) NOT NULL,
+          FOREIGN KEY ( funcionario_cpf )              REFERENCES  funcionario ( cpf ),
+          FOREIGN KEY ( servico_id )                   REFERENCES  servico ( servico_id ),
+          PRIMARY KEY ( funcionario_cpf , servico_id )
+);

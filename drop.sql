@@ -1,0 +1,11 @@
+DROP TABLE cliente;
+DROP TABLE dependente ;
+DROP TABLE funcionario ;
+DROP TABLE quarto ;
+DROP TABLE produto ;
+DROP TABLE reserva ;
+DROP TABLE hospedagem ;
+DROP TABLE servico;
+DROP TABLE avaliacao ;
+DROP TABLE venda ;
+DROP TABLE alocacao ;

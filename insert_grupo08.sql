@@ -15,7 +15,10 @@ INSERT INTO dependente (cpf, titular, nome, data_nasc)
 /* Comando de insercao de rows em servico */
 
 INSERT INTO servico (id_servico, valor)
-  VALUES (1, 25);
+  SELECT 1, 25 FROM dual
+  UNION ALL SELECT 2, 30 FROM dual
+  UNION ALL SELECT 3, 10 FROM dual
+  UNION ALL SELECT 4, 36 FROM dual
 
 /* Comando de insercao de rows em frigobar */
 

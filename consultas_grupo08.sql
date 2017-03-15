@@ -1,5 +1,10 @@
+/* Q08 */
 
-/* Consulta referente a questao #11 */
+SELECT COUNT(DISTINCT c.cpf) FROM cliente c
+INNER JOIN dependente d
+ON c.cpf = d.titular AND c.sexo='F';
+
+/* Q11 */
 
 SELECT * FROM cliente c
 JOIN hospedagem h
@@ -8,8 +13,8 @@ WHERE c.data_nascimento = (
   SELECT MAX(data_nascimento) FROM (SELECT * FROM cliente JOIN hospedagem ON cpf_cliente = cpf)
 );
 
-/* Consulta referente a questao #8 */
+/* Q15 */
 
-SELECT COUNT(DISTINCT c.cpf) FROM cliente c
-INNER JOIN dependente d
-ON c.cpf = d.titular AND c.sexo='F';
+SELECT nota
+FROM avaliacao
+ORDER BY nota ASC

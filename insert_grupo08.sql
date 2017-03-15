@@ -20,6 +20,26 @@ INSERT INTO servico (id_servico, valor)
   UNION ALL SELECT 3, 10 FROM dual
   UNION ALL SELECT 4, 36 FROM dual
 
+/* Comando de insercao de rows em avaliacao */
+
+INSERT INTO avaliacao (id_servico, cpf_cliente, nota, comentario)
+  SELECT 1, '01213232323', 8, NULL FROM dual
+  UNION ALL SELECT 1, '04343432223', 5, NULL FROM dual
+  UNION ALL SELECT 2, '01213232323', 10, NULL FROM dual
+  UNION ALL SELECT 2, '01123367787', 7.5, NULL FROM dual
+
+
+  CREATE TABLE avaliacao (
+      id_servico NUMBER,
+      cpf_cliente CHAR(11),
+      nota NUMBER,
+      comentario VARCHAR(200),
+      PRIMARY KEY (id_servico, cpf_cliente),
+      FOREIGN KEY (id_servico) REFERENCES servico(id_servico) ON DELETE CASCADE,
+      FOREIGN KEY (cpf_cliente) REFERENCES cliente(cpf)
+  );
+
+
 /* Comando de insercao de rows em frigobar */
 
 INSERT INTO frigobar (id_frigobar)

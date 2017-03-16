@@ -28,14 +28,36 @@ INSERT INTO funcionario (         cpf,           nome                   , salari
   UNION ALL SELECT      '20000000005', 'Funcionario 5'                  ,     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'ADPT'       FROM dual
 ;
 
+/* Comando de insercao de rows em Quarto */
+
+INSERT INTO quarto ( id_quarto , numero,    tipo      , vista     , diaria )
+  SELECT               1       ,   1   ,   'suite'    , 'topper'  , 4.2 FROM dual
+  UNION ALL SELECT     2       ,   2   ,   'solteiro' , 'cool'    , 2.2 FROM dual
+  UNION ALL SELECT     3       ,   3   ,   'suite'    , 'topper'  , 4.2 FROM dual
+  UNION ALL SELECT     4       ,   4   ,   'solteiro' , 'ruim'    , 1.2 FROM dual
+  UNION ALL SELECT     5       ,   5   ,   'suite'    , 'topper'  , 4.2 FROM dual
+;
 
 /* Comando de insercao de rows em servico */
 
-INSERT INTO servico (id_servico, valor)
-  SELECT 1, 25 FROM dual
-  UNION ALL SELECT 2, 30 FROM dual
-  UNION ALL SELECT 3, 10 FROM dual
-  UNION ALL SELECT 4, 36 FROM dual
+INSERT INTO servico ( id_servico, valor)
+  SELECT                1       , 25 FROM dual
+  UNION ALL SELECT      2       , 30 FROM dual
+  UNION ALL SELECT      3       , 10 FROM dual
+  UNION ALL SELECT      4       , 36 FROM dual
+  UNION ALL SELECT      5       , 50 FROM dual
+;
+
+/* Comando de insercao de rows em hospedagem */
+
+INSERT INTO hospedagem (            data_inicio          ,                 data_fim           ,  cpf_cliente      , id_quarto )
+  SELECT              TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('21/03/2017', 'dd/mm/yyyy'), '01123367787'     , 1 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('21/03/2017', 'dd/mm/yyyy'), '01123367787'     , 2 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('23/03/2017', 'dd/mm/yyyy'), '00000000004'     , 3 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('24/03/2017', 'dd/mm/yyyy'), '00000000005'     , 4 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('25/03/2017', 'dd/mm/yyyy'), '04343432223'     , 5 FROM dual
+;
+
 
 /* Comando de insercao de rows em avaliacao */
 

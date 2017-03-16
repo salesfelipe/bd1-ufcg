@@ -58,6 +58,27 @@ INSERT INTO hospedagem (            data_inicio          ,                 data_
   UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('25/03/2017', 'dd/mm/yyyy'), '04343432223'     , 5 FROM dual
 ;
 
+/* Comando de insercao de rows em reserva */
+
+INSERT INTO reserva (               data_inicio          ,                 data_fim           ,  cpf_cliente      , id_quarto )
+  SELECT              TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('21/03/2017', 'dd/mm/yyyy'), '01123367787'     , 1 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('21/03/2017', 'dd/mm/yyyy'), '01123367787'     , 2 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('23/03/2017', 'dd/mm/yyyy'), '00000000004'     , 3 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('24/03/2017', 'dd/mm/yyyy'), '00000000005'     , 4 FROM dual
+  UNION ALL SELECT    TO_DATE('16/03/2017', 'dd/mm/yyyy'), TO_DATE('25/03/2017', 'dd/mm/yyyy'), '04343432223'     , 5 FROM dual
+;
+
+/* Comando de insercao de rows em servico prestado */
+
+INSERT INTO servico_prestado ( cpf_func          ,  id_servico  )
+  SELECT                      '20000000001'      ,  3 FROM dual
+  UNION ALL SELECT            '20000000002'      ,  1 FROM dual
+  UNION ALL SELECT            '20000000003'      ,  2 FROM dual
+  UNION ALL SELECT            '20000000004'      ,  4 FROM dual
+  UNION ALL SELECT            '20000000005'      ,  5 FROM dual
+;
+
+
 
 /* Comando de insercao de rows em avaliacao */
 

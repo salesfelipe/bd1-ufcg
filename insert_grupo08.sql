@@ -1,7 +1,7 @@
 /* Comando de insercao de rows em cliente */
 
 INSERT INTO cliente (        cpf,             nome,                     data_nascimento,  sexo,         rua          , numero , bairro       , cep       , email)
-  SELECT           '00000000001', 'Cliente 1'  , TO_DATE('23/08/2001', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 2'         , 1     , 'Bairro 1' , '00000001', 'cliente1@email.com'   FROM dual
+  SELECT           '00000000001', 'Cliente 1'  , TO_DATE('23/08/2001', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 1'         , 1     , 'Bairro 1' , '00000001', 'cliente1@email.com'   FROM dual
   UNION ALL SELECT '00000000002', 'Cliente 2', TO_DATE('23/08/2002', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 2'           , 2     , 'Bairro 2'   , '00000002', 'cliente2@email.com' FROM dual
   UNION ALL SELECT '00000000003', 'Cliente 3'   , TO_DATE('23/08/2003', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 3'        , 3     , 'Bairro 3'  , '00000003', 'cliente3@email.com'    FROM dual
   UNION ALL SELECT '00000000004', 'Cliente 4'     , TO_DATE('23/08/2004', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 4'      , 4      , 'Bairro 4'  , '00000004', 'cliente4@email.com'      FROM dual

@@ -13,6 +13,12 @@ WHERE c.data_nascimento = (
   SELECT MAX(data_nascimento) FROM (SELECT * FROM cliente JOIN hospedagem ON cpf_cliente = cpf)
 );
 
+/* Q14 */
+
+SELECT COUNT (DISTINCT c.cpf) FROM cliente c
+INNER JOIN avaliacao a
+ON a.cpf_cliente = c.cpf AND c.sexo = 'F'
+
 /* Q15 */
 
 SELECT nota

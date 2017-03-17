@@ -4,6 +4,12 @@ SELECT COUNT(DISTINCT c.cpf) FROM cliente c
 INNER JOIN dependente d
 ON c.cpf = d.titular AND c.sexo='F';
 
+/* Q10 */
+
+SELECT COUNT(DISTINCT r.id_quarto) FROM reserva r
+INNER JOIN quarto q
+ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM data_inicio) = EXTRACT(YEAR FROM sysdate) 
+
 /* Q11 */
 
 SELECT * FROM cliente c

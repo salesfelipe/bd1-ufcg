@@ -8,7 +8,7 @@ ON c.cpf = d.titular AND c.sexo='F';
 
 SELECT COUNT(DISTINCT r.id_quarto) FROM reserva r
 INNER JOIN quarto q
-ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM data_inicio) = EXTRACT(YEAR FROM sysdate) 
+ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM r.data_inicio) = EXTRACT(YEAR FROM sysdate) 
 
 /* Q11 */
 

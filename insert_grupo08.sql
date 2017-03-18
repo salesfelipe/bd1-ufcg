@@ -145,6 +145,15 @@ INSERT INTO produto ( id_produto,       nome            , descricao             
   UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual
 ;
 
+/* Comando de insercao de rows em venda */
+
+INSERT INTO venda ( id_produto, id_quarto, quantidade,       data       )
+  SELECT                  1   , 2        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
+  UNION ALL SELECT        2   , 1        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
+  UNION ALL SELECT        3   , 4        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
+  UNION ALL SELECT        4   , 5        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
+  UNION ALL SELECT        5   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy')FROM dual
+;
 
 
 

@@ -46,6 +46,22 @@ INSERT INTO servico ( id_servico, valor)
   UNION ALL SELECT      3       , 10 FROM dual
   UNION ALL SELECT      4       , 36 FROM dual
   UNION ALL SELECT      5       , 50 FROM dual
+  UNION ALL SELECT      6       , 11 FROM dual
+  UNION ALL SELECT      7       , 12 FROM dual
+  UNION ALL SELECT      8       , 13 FROM dual
+  UNION ALL SELECT      9       , 14 FROM dual
+  UNION ALL SELECT      10      , 1 FROM dual
+  UNION ALL SELECT      11      , 2 FROM dual
+  UNION ALL SELECT      12      , 3 FROM dual
+  UNION ALL SELECT      13      , 4 FROM dual
+  UNION ALL SELECT      14      , 5 FROM dual
+  UNION ALL SELECT      15      , 40 FROM dual
+  /* Bar*/
+  UNION ALL SELECT      16      , 20 FROM dual
+  UNION ALL SELECT      17      , 25 FROM dual
+  UNION ALL SELECT      18      , 100 FROM dual
+  UNION ALL SELECT      19      , 60 FROM dual
+  UNION ALL SELECT      20      , 40 FROM dual
 ;
 
 /* Comando de insercao de rows em hospedagem */
@@ -77,6 +93,58 @@ INSERT INTO servico_prestado ( cpf_func          ,  id_servico  )
   UNION ALL SELECT            '20000000004'      ,  4 FROM dual
   UNION ALL SELECT            '20000000005'      ,  5 FROM dual
 ;
+
+/* Comando de insercao de rows em lavanderia */
+
+INSERT INTO lavanderia ( id_lavanderia )
+  SELECT                  3 FROM dual
+  UNION ALL SELECT        6 FROM dual
+  UNION ALL SELECT        7 FROM dual
+  UNION ALL SELECT        8 FROM dual
+  UNION ALL SELECT        9 FROM dual
+;
+
+
+/* Comando de insercao de rows em frigobar */
+
+INSERT INTO frigobar ( id_frigobar )
+  SELECT                  10 FROM dual
+  UNION ALL SELECT        11 FROM dual
+  UNION ALL SELECT        12 FROM dual
+  UNION ALL SELECT        13 FROM dual
+  UNION ALL SELECT        14 FROM dual
+;
+
+/* Comando de insercao de rows em restaurante */
+
+INSERT INTO restaurante ( id_rest )
+  SELECT                  1 FROM dual
+  UNION ALL SELECT        2 FROM dual
+  UNION ALL SELECT        4 FROM dual
+  UNION ALL SELECT        5 FROM dual
+  UNION ALL SELECT       15 FROM dual
+;
+
+/* Comando de insercao de rows em bar */
+
+INSERT INTO bar ( id_bar )
+  SELECT                  16 FROM dual
+  UNION ALL SELECT        17 FROM dual
+  UNION ALL SELECT        18 FROM dual
+  UNION ALL SELECT        19 FROM dual
+  UNION ALL SELECT        20 FROM dual
+;
+
+/* Comando de insercao de rows em produto */
+
+INSERT INTO produto ( id_produto,       nome            , descricao                 ,  valor        , id_lavanderia,   id_frigobar , id_rest, id_bar )
+  SELECT                  1     , 'sabao em powder'     , 'dar aquele grau na roupa',        1      ,       3      ,     NULL      ,   NULL ,  NULL  FROM dual
+  UNION ALL SELECT        2     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
+  UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   15   ,  NULL  FROM dual
+  UNION ALL SELECT        4     , 'tequila'             , 'ficar bebo e pa'         ,        12     ,       NULL   ,     NULL      ,   NULL ,  18    FROM dual
+  UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual
+;
+
 
 
 

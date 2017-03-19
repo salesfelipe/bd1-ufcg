@@ -7,6 +7,10 @@ SELECT nome FROM hospedagem h
 JOIN cliente c ON h.cpf_cliente = c.cpf
 JOIN quarto q ON q.id_quarto = h.id_quarto WHERE q.diaria = (SELECT MIN(diaria) FROM quarto);
 
+/* Q03 */
+
+CREATE OR REPLACE VIEW equipamentos as SELECT equipamento FROM equipamento;  
+
 /* Q08 */
 
 SELECT COUNT(DISTINCT c.cpf) FROM cliente c

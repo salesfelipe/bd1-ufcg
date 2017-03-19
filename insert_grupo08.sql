@@ -1,11 +1,11 @@
 /* Comando de insercao de rows em cliente */
 
-INSERT INTO cliente (        cpf,             nome,                     data_nascimento,  sexo,         rua          , numero , bairro       , cep       , email)
-  SELECT           '00000000001', 'Cliente 1'  , TO_DATE('23/08/2001', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 1'         , 1     , 'Bairro 1' , '00000001', 'cliente1@email.com'   FROM dual
-  UNION ALL SELECT '00000000002', 'Cliente 2', TO_DATE('23/08/2002', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 2'           , 2     , 'Bairro 2'   , '00000002', 'cliente2@email.com' FROM dual
-  UNION ALL SELECT '00000000003', 'Cliente 3'   , TO_DATE('23/08/2003', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 3'        , 3     , 'Bairro 3'  , '00000003', 'cliente3@email.com'    FROM dual
-  UNION ALL SELECT '00000000004', 'Cliente 4'     , TO_DATE('23/08/2004', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 4'      , 4      , 'Bairro 4'  , '00000004', 'cliente4@email.com'      FROM dual
-  UNION ALL SELECT '00000000005', 'Cliente 5'     , TO_DATE('23/08/2005', 'dd/mm/yyyy'), 'F'  , 'Rua da cliente 5'      , 5      , 'Bairro 5'  , '00000005', 'cliente5@email.com'      FROM dual
+INSERT INTO cliente (        cpf,             nome,                     data_nascimento,  sexo,         rua          , numero , bairro       , cep        , email)
+  SELECT           '00000000001', 'Cliente 1'     , TO_DATE('23/08/2001', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 1'   , 1      , 'Bairro 1'   , '00000001' , 'cliente1@email.com'  FROM dual
+  UNION ALL SELECT '00000000002', 'Cliente 2'     , TO_DATE('23/08/2002', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 2'   , 2      , 'Bairro 2'   , '00000002' , 'cliente2@email.com'  FROM dual
+  UNION ALL SELECT '00000000003', 'Cliente 3'     , TO_DATE('23/08/2003', 'dd/mm/yyyy'), 'F'  , 'Rua do cliente 3'   , 3      , 'Bairro 3'   , '00000003' , 'cliente3@email.com'  FROM dual
+  UNION ALL SELECT '00000000004', 'Cliente 4'     , TO_DATE('23/08/2004', 'dd/mm/yyyy'), 'M'  , 'Rua do cliente 4'   , 4      , 'Bairro 4'   , '00000004' , 'cliente4@email.com'  FROM dual
+  UNION ALL SELECT '00000000005', 'Cliente 5'     , TO_DATE('23/08/2005', 'dd/mm/yyyy'), 'F'  , 'Rua da cliente 5'   , 5      , 'Bairro 5'   , '00000005' , 'cliente5@email.com'  FROM dual
 ;
 
 /* Comando de insercao de rows em dependente */
@@ -56,12 +56,27 @@ INSERT INTO servico ( id_servico, valor)
   UNION ALL SELECT      13      , 4 FROM dual
   UNION ALL SELECT      14      , 5 FROM dual
   UNION ALL SELECT      15      , 40 FROM dual
-  /* Bar*/
+
+  /* Bar */
   UNION ALL SELECT      16      , 20 FROM dual
   UNION ALL SELECT      17      , 25 FROM dual
   UNION ALL SELECT      18      , 100 FROM dual
   UNION ALL SELECT      19      , 60 FROM dual
   UNION ALL SELECT      20      , 40 FROM dual
+
+  /* Passeio Turistico */
+  UNION ALL SELECT      21      , 60 FROM dual
+  UNION ALL SELECT      22      , 61 FROM dual
+  UNION ALL SELECT      23      , 62  FROM dual
+  UNION ALL SELECT      24      , 63 FROM dual
+  UNION ALL SELECT      25      , 64 FROM dual
+
+  /* Estacionamento */
+  UNION ALL SELECT      26      , 10 FROM dual
+  UNION ALL SELECT      27      , 11 FROM dual
+  UNION ALL SELECT      28      , 12 FROM dual
+  UNION ALL SELECT      29      , 13 FROM dual
+  UNION ALL SELECT      30      , 14 FROM dual
 ;
 
 /* Comando de insercao de rows em hospedagem */
@@ -155,22 +170,52 @@ INSERT INTO venda ( id_produto, id_quarto, quantidade,       data       )
   UNION ALL SELECT        5   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy')FROM dual
 ;
 
-
-
 /* Comando de insercao de rows em avaliacao */
 
-INSERT INTO avaliacao (id_servico, cpf_cliente, nota, comentario)
-  SELECT 1, '00000000002', 8, NULL FROM dual
-  UNION ALL SELECT 1, '00000000003', 5, NULL FROM dual
-  UNION ALL SELECT 2, '00000000002', 10, NULL FROM dual
-  UNION ALL SELECT 2, '00000000001', 7.5, NULL FROM dual
+INSERT INTO avaliacao ( id_servico  , cpf_cliente   ,  nota,  comentario)
+  SELECT                      1     , '00000000002' ,  8   ,  NULL FROM dual
+  UNION ALL SELECT            1     , '00000000003' ,  5   ,  NULL FROM dual
+  UNION ALL SELECT            2     , '00000000002' ,  10  ,  NULL FROM dual
+  UNION ALL SELECT            2     , '00000000001' ,  7.5 ,  NULL FROM dual
+  UNION ALL SELECT            2     , '00000000003' ,  8.5 ,  NULL FROM dual
+;
 
-/* Comando de insercao de rows em frigobar */
+/* Comando de insercao de rows em telefone */
 
-INSERT INTO frigobar (id_frigobar)
-  VALUES (1);
+INSERT INTO telefone ( telefone  , cpf_cliente)
+  SELECT              '99999999' , '00000000002' FROM dual
+  UNION ALL SELECT    '99999998' , '00000000003' FROM dual
+  UNION ALL SELECT    '99999997' , '00000000004' FROM dual
+  UNION ALL SELECT    '99999996' , '00000000001' FROM dual
+  UNION ALL SELECT    '99999995' , '00000000005' FROM dual
+;
 
-/* Comando de insercao de rows em produto */
+/* Comando de insercao de rows em equipamento */
 
-INSERT INTO produto (id_produto, nome, descricao, valor, id_lavanderia, id_frigobar, id_rest, id_bar)
-  VALUES (1, 'Produto 1', 'Descricao do Produto 1', 8.00, NULL, 1, NULL, NULL);
+INSERT INTO equipamento ( equipamento    , id_quarto )
+  SELECT              'ferro de engomar' , 1 FROM dual
+  UNION ALL SELECT    'mesa  de engomar' , 1 FROM dual
+  UNION ALL SELECT    'ventilador'       , 2 FROM dual
+  UNION ALL SELECT    'ar condicionado'  , 3 FROM dual
+  UNION ALL SELECT    'televisao'        , 4 FROM dual
+;
+
+/* Comando de insercao de rows em passeio_turistico */
+
+INSERT INTO passeio_turistico ( id_passeio )
+  SELECT               21 FROM dual
+  UNION ALL SELECT     22 FROM dual
+  UNION ALL SELECT     23 FROM dual
+  UNION ALL SELECT     24 FROM dual
+  UNION ALL SELECT     25 FROM dual
+;
+
+/* Comando de insercao de rows em estacionamento */
+
+INSERT INTO estacionamento ( id_estacionamento )
+  SELECT               26 FROM dual
+  UNION ALL SELECT     27 FROM dual
+  UNION ALL SELECT     28 FROM dual
+  UNION ALL SELECT     29 FROM dual
+  UNION ALL SELECT     30 FROM dual
+;

@@ -1,3 +1,12 @@
+/* Q01 */
+SELECT id_frigobar, COUNT(DISTINCT id_produto) AS numeroProdutos FROM produto WHERE id_frigobar IS NOT NULL GROUP BY id_frigobar;
+
+/* Q02 */
+
+SELECT nome FROM hospedagem h
+JOIN cliente c ON h.cpf_cliente = c.cpf
+JOIN quarto q ON q.id_quarto = h.id_quarto WHERE q.diaria = (SELECT MIN(diaria) FROM quarto);
+
 /* Q08 */
 
 SELECT COUNT(DISTINCT c.cpf) FROM cliente c
@@ -8,7 +17,7 @@ ON c.cpf = d.titular AND c.sexo='F';
 
 SELECT COUNT(DISTINCT r.id_quarto) FROM reserva r
 INNER JOIN quarto q
-ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM r.data_inicio) = EXTRACT(YEAR FROM sysdate) 
+ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM r.data_inicio) = EXTRACT(YEAR FROM sysdate)
 
 /* Q11 */
 

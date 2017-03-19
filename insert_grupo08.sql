@@ -155,6 +155,8 @@ INSERT INTO bar ( id_bar )
 INSERT INTO produto ( id_produto,       nome            , descricao                 ,  valor        , id_lavanderia,   id_frigobar , id_rest, id_bar )
   SELECT                  1     , 'sabao em powder'     , 'dar aquele grau na roupa',        1      ,       3      ,     NULL      ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        2     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
+  UNION ALL SELECT        6     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     11        ,   NULL ,  NULL  FROM dual
+  UNION ALL SELECT        7     , 'COCA'                , 'matar aquela sede'       ,        2      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   15   ,  NULL  FROM dual
   UNION ALL SELECT        4     , 'tequila'             , 'ficar bebo e pa'         ,        12     ,       NULL   ,     NULL      ,   NULL ,  18    FROM dual
   UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual

@@ -9,7 +9,30 @@ JOIN quarto q ON q.id_quarto = h.id_quarto WHERE q.diaria = (SELECT MIN(diaria) 
 
 /* Q03 */
 
-CREATE OR REPLACE VIEW equipamentos as SELECT equipamento FROM equipamento;  
+CREATE OR REPLACE VIEW equipamentos as SELECT equipamento FROM equipamento;
+
+/* Q04 */
+
+SELECT id_servico, media FROM
+  (
+    SELECT id_servico,
+      (
+        SELECT AVG(nota) FROM avaliacao WHERE id_servico = a.id_servico GROUP BY id_servico
+      )
+    as media FROM avaliacao a GROUP BY id_servico
+  )
+WHERE media =
+  (
+    SELECT MIN(media) FROM
+      (
+        SELECT id_servico,
+          (
+            SELECT AVG(nota) FROM avaliacao WHERE id_servico = av.id_servico GROUP BY id_servico
+          )
+        as media FROM avaliacao av GROUP BY id_servico
+      )
+  )
+;
 
 /* Q08 */
 

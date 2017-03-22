@@ -26,6 +26,14 @@ INSERT INTO funcionario (         cpf,           nome  , salario    ,           
   UNION ALL SELECT      '20000000003', 'Funcionario 3',     12.3   ,TO_DATE('26/08/1970', 'dd/mm/yyyy'), 'Caixa'      FROM dual
   UNION ALL SELECT      '20000000004', 'Funcionario 4',     13.4   ,TO_DATE('26/08/2005', 'dd/mm/yyyy'), 'Gerente'    FROM dual
   UNION ALL SELECT      '20000000005', 'Funcionario 5',     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'ADPT'       FROM dual
+
+  /* Funcionariso do restaurante*/
+
+  UNION ALL SELECT      '20000000006', 'Funcionario 6' ,     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'Garcom'     FROM dual
+  UNION ALL SELECT      '20000000007', 'Funcionario 7' ,     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'Garconete'  FROM dual
+  UNION ALL SELECT      '20000000008', 'Funcionario 8' ,     14.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'Caixa rest' FROM dual
+  UNION ALL SELECT      '20000000009', 'Funcionario 9' ,     15.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'Chefe rest' FROM dual
+  UNION ALL SELECT      '20000000010', 'Funcionario 10',     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'Gerente'    FROM dual
 ;
 
 /* Comando de insercao de rows em Quarto */
@@ -41,16 +49,21 @@ INSERT INTO quarto ( id_quarto , numero,    tipo      , vista     , diaria )
 /* Comando de insercao de rows em servico */
 
 INSERT INTO servico ( id_servico, valor)
+  /* restaurante */
   SELECT                1       , 25 FROM dual
   UNION ALL SELECT      2       , 30 FROM dual
   UNION ALL SELECT      3       , 10 FROM dual
   UNION ALL SELECT      4       , 36 FROM dual
   UNION ALL SELECT      5       , 50 FROM dual
+
+  /* lavanderia */
   UNION ALL SELECT      6       , 11 FROM dual
   UNION ALL SELECT      7       , 12 FROM dual
   UNION ALL SELECT      8       , 13 FROM dual
   UNION ALL SELECT      9       , 14 FROM dual
   UNION ALL SELECT      10      , 1 FROM dual
+
+  /* frigobar */
   UNION ALL SELECT      11      , 2 FROM dual
   UNION ALL SELECT      12      , 3 FROM dual
   UNION ALL SELECT      13      , 4 FROM dual
@@ -102,32 +115,37 @@ INSERT INTO reserva (               data_inicio          ,                 data_
 /* Comando de insercao de rows em servico prestado */
 
 INSERT INTO servico_prestado ( cpf_func          ,  id_servico  )
-  SELECT                      '20000000001'      ,  3 FROM dual
-  UNION ALL SELECT            '20000000002'      ,  1 FROM dual
-  UNION ALL SELECT            '20000000003'      ,  2 FROM dual
-  UNION ALL SELECT            '20000000004'      ,  4 FROM dual
-  UNION ALL SELECT            '20000000005'      ,  5 FROM dual
+  SELECT                      '20000000001'      ,  6 FROM dual
+  UNION ALL SELECT            '20000000002'      ,  7 FROM dual
+  UNION ALL SELECT            '20000000003'      ,  20 FROM dual
+  UNION ALL SELECT            '20000000004'      ,  15 FROM dual
+  UNION ALL SELECT            '20000000005'      ,  30 FROM dual
+  UNION ALL SELECT            '20000000006'      ,  1 FROM dual
+  UNION ALL SELECT            '20000000007'      ,  2 FROM dual
+  UNION ALL SELECT            '20000000008'      ,  3 FROM dual
+  UNION ALL SELECT            '20000000009'      ,  4 FROM dual
+  UNION ALL SELECT            '20000000010'      ,  5 FROM dual
 ;
 
 /* Comando de insercao de rows em lavanderia */
 
 INSERT INTO lavanderia ( id_lavanderia )
-  SELECT                  3 FROM dual
-  UNION ALL SELECT        6 FROM dual
+  SELECT                  6 FROM dual
   UNION ALL SELECT        7 FROM dual
   UNION ALL SELECT        8 FROM dual
   UNION ALL SELECT        9 FROM dual
+  UNION ALL SELECT        10 FROM dual
 ;
 
 
 /* Comando de insercao de rows em frigobar */
 
 INSERT INTO frigobar ( id_frigobar )
-  SELECT                  10 FROM dual
-  UNION ALL SELECT        11 FROM dual
+  SELECT                  11 FROM dual
   UNION ALL SELECT        12 FROM dual
   UNION ALL SELECT        13 FROM dual
   UNION ALL SELECT        14 FROM dual
+  UNION ALL SELECT        15 FROM dual
 ;
 
 /* Comando de insercao de rows em restaurante */
@@ -135,9 +153,9 @@ INSERT INTO frigobar ( id_frigobar )
 INSERT INTO restaurante ( id_rest )
   SELECT                  1 FROM dual
   UNION ALL SELECT        2 FROM dual
+  UNION ALL SELECT        3 FROM dual
   UNION ALL SELECT        4 FROM dual
   UNION ALL SELECT        5 FROM dual
-  UNION ALL SELECT       15 FROM dual
 ;
 
 /* Comando de insercao de rows em bar */
@@ -153,11 +171,11 @@ INSERT INTO bar ( id_bar )
 /* Comando de insercao de rows em produto */
 
 INSERT INTO produto ( id_produto,       nome            , descricao                 ,  valor        , id_lavanderia,   id_frigobar , id_rest, id_bar )
-  SELECT                  1     , 'sabao em powder'     , 'dar aquele grau na roupa',        1      ,       3      ,     NULL      ,   NULL ,  NULL  FROM dual
+  SELECT                  1     , 'sabao em powder'     , 'dar aquele grau na roupa',        1      ,       6      ,     NULL      ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        2     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        6     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     11        ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        7     , 'COCA'                , 'matar aquela sede'       ,        2      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
-  UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   15   ,  NULL  FROM dual
+  UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   5   ,   NULL  FROM dual
   UNION ALL SELECT        4     , 'tequila'             , 'ficar bebo e pa'         ,        12     ,       NULL   ,     NULL      ,   NULL ,  18    FROM dual
   UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual
 ;
@@ -165,11 +183,11 @@ INSERT INTO produto ( id_produto,       nome            , descricao             
 /* Comando de insercao de rows em venda */
 
 INSERT INTO venda ( id_produto, id_quarto, quantidade,       data       )
-  SELECT                  1   , 2        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
-  UNION ALL SELECT        2   , 1        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
-  UNION ALL SELECT        3   , 4        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
-  UNION ALL SELECT        4   , 5        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy')FROM dual
-  UNION ALL SELECT        5   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy')FROM dual
+  SELECT                  1   , 2        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
+  UNION ALL SELECT        2   , 1        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
+  UNION ALL SELECT        3   , 4        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
+  UNION ALL SELECT        4   , 5        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
+  UNION ALL SELECT        5   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy') FROM dual
 ;
 
 /* Comando de insercao de rows em avaliacao */

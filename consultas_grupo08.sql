@@ -36,7 +36,7 @@ WHERE media =
 
 /* Q05 */
 
-CREATE OR REPLACE VIEW funcao_funcionarios_restaurante as
+CREATE OR REPLACE VIEW func_funcionarios_rest as
   SELECT funcao FROM restaurante
     LEFT OUTER JOIN servico_prestado ON restaurante.id_rest = servico_prestado.id_servico
     LEFT OUTER JOIN funcionario ON servico_prestado.cpf_func = funcionario.cpf

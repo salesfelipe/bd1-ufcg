@@ -42,19 +42,19 @@ CREATE OR REPLACE VIEW func_funcionarios_rest as
     LEFT OUTER JOIN funcionario ON servico_prestado.cpf_func = funcionario.cpf
 ;
 
-/* Q08 */
+/* Q07 */
 
 SELECT COUNT(DISTINCT c.cpf) FROM cliente c
 INNER JOIN dependente d
 ON c.cpf = d.titular AND c.sexo='F';
 
-/* Q10 */
+/* Q09 */
 
 SELECT COUNT(DISTINCT r.id_quarto) FROM reserva r
 INNER JOIN quarto q
 ON q.id_quarto = r.id_quarto AND q.tipo = 'solteiro' AND EXTRACT(YEAR FROM r.data_inicio) = EXTRACT(YEAR FROM sysdate)
 
-/* Q11 */
+/* Q10 */
 
 SELECT * FROM cliente c
 JOIN hospedagem h
@@ -63,13 +63,13 @@ WHERE c.data_nascimento = (
   SELECT MAX(data_nascimento) FROM (SELECT * FROM cliente JOIN hospedagem ON cpf_cliente = cpf)
 );
 
-/* Q14 */
+/* Q13 */
 
 SELECT COUNT (DISTINCT c.cpf) FROM cliente c
 INNER JOIN avaliacao a
 ON a.cpf_cliente = c.cpf AND c.sexo = 'F'
 
-/* Q15 */
+/* Q14 */
 
 SELECT nota
 FROM avaliacao

@@ -62,6 +62,13 @@ SELECT COUNT(DISTINCT c.cpf) FROM cliente c
 INNER JOIN dependente d
 ON c.cpf = d.titular AND c.sexo='F';
 
+/* Q08 */
+
+SELECT * FROM reserva
+WHERE data_inicio = (
+  SELECT MIN(data_inicio) FROM (SELECT * FROM reserva)
+);
+
 /* Q09 */
 
 SELECT COUNT(DISTINCT r.id_quarto) FROM reserva r

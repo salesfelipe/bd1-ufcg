@@ -178,6 +178,7 @@ INSERT INTO produto ( id_produto,       nome            , descricao             
   UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   5   ,   NULL  FROM dual
   UNION ALL SELECT        4     , 'tequila'             , 'ficar bebo e pa'         ,        12     ,       NULL   ,     NULL      ,   NULL ,  18    FROM dual
   UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual
+  UNION ALL SELECT        8     , 'Agua Sanitaria'      , 'dar aquele grau na roupa',        1      ,       6      ,     NULL      ,   NULL ,  NULL  FROM dual
 ;
 
 /* Comando de insercao de rows em venda */

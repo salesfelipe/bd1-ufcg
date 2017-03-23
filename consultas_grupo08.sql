@@ -84,6 +84,10 @@ WHERE c.data_nascimento = (
   SELECT MAX(data_nascimento) FROM (SELECT * FROM cliente JOIN hospedagem ON cpf_cliente = cpf)
 );
 
+/* Q11 */
+
+SELECT * FROM produto WHERE id_lavanderia IS NOT NULL AND nome LIKE '%Agua%';
+
 /* Q13 */
 
 SELECT COUNT (DISTINCT c.cpf) FROM cliente c

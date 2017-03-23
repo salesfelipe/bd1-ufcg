@@ -176,6 +176,7 @@ INSERT INTO produto ( id_produto,       nome            , descricao             
   UNION ALL SELECT        6     , 'AGUA'                , 'matar aquela sede'       ,        1      ,       NULL   ,     11        ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        7     , 'COCA'                , 'matar aquela sede'       ,        2      ,       NULL   ,     12        ,   NULL ,  NULL  FROM dual
   UNION ALL SELECT        3     , 'FILLET A PARMEGIANA' , 'BATER um rango'          ,        30     ,       NULL   ,     NULL      ,   5   ,   NULL  FROM dual
+  UNION ALL SELECT        9     , 'FILLET AO MOLHO MADEIRA' , 'BATER um rango'      ,        25     ,       NULL   ,     NULL      ,   5   ,   NULL  FROM dual
   UNION ALL SELECT        4     , 'tequila'             , 'ficar bebo e pa'         ,        12     ,       NULL   ,     NULL      ,   NULL ,  18    FROM dual
   UNION ALL SELECT        5     , 'marguerita'          , 'hmm'                     ,        13     ,       NULL   ,     NULL      ,   NULL ,  20    FROM dual
   UNION ALL SELECT        8     , 'Agua Sanitaria'      , 'dar aquele grau na roupa',        1      ,       6      ,     NULL      ,   NULL ,  NULL  FROM dual
@@ -189,6 +190,7 @@ INSERT INTO venda ( id_produto, id_quarto, quantidade,       data       )
   UNION ALL SELECT        3   , 4        ,     1     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
   UNION ALL SELECT        4   , 5        ,     2     ,  TO_DATE('21/03/2017', 'dd/mm/yyyy') FROM dual
   UNION ALL SELECT        5   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy') FROM dual
+  UNION ALL SELECT        9   , 3        ,     1     ,  TO_DATE('20/03/2017', 'dd/mm/yyyy') FROM dual
 ;
 
 /* Comando de insercao de rows em avaliacao */

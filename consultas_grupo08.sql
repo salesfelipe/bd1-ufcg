@@ -88,6 +88,11 @@ WHERE c.data_nascimento = (
 
 SELECT * FROM produto WHERE id_lavanderia IS NOT NULL AND nome LIKE '%Agua%';
 
+/* Q12 */
+
+SELECT * FROM (SELECT * FROM venda LEFT OUTER JOIN produto ON venda.id_produto = produto.id_produto WHERE produto.id_rest IS NOT NULL ORDER BY data ASC) WHERE ROWNUM <=1;
+
+
 /* Q13 */
 
 SELECT COUNT (DISTINCT c.cpf) FROM cliente c

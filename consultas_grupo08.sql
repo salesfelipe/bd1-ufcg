@@ -42,6 +42,20 @@ CREATE OR REPLACE VIEW func_funcionarios_rest as
     LEFT OUTER JOIN funcionario ON servico_prestado.cpf_func = funcionario.cpf
 ;
 
+/* Q06 */
+
+SELECT DISTINCT (f.cpf), f.nome, f.salario, f.data_nasc, f.funcao FROM funcionario f
+JOIN (
+       SELECT * FROM servico_prestado sp
+       JOIN (
+               SELECT * FROM servico s
+               JOIN bar b
+               ON b.id_bar = s.id_servico
+            ) sb
+       ON sp.id_servico = sb.id_servico
+     ) spb
+ON f.cpf = spb.cpf_func AND f.salario >= 3000
+
 /* Q07 */
 
 SELECT COUNT(DISTINCT c.cpf) FROM cliente c

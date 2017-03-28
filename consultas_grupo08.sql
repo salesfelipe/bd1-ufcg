@@ -1,4 +1,5 @@
 /* Q01 */
+
 SELECT id_frigobar, COUNT(DISTINCT id_produto) AS numeroProdutos FROM produto WHERE id_frigobar IS NOT NULL GROUP BY id_frigobar;
 
 /* Q02 */
@@ -13,23 +14,13 @@ CREATE OR REPLACE VIEW equipamentos as SELECT equipamento FROM equipamento;
 
 /* Q04 */
 
-SELECT id_servico, media FROM
+SELECT id_servico, nota FROM
+  avaliacao
+WHERE nota =
   (
-    SELECT id_servico,
+    SELECT MIN(nota) FROM
       (
-        SELECT AVG(nota) FROM avaliacao WHERE id_servico = a.id_servico GROUP BY id_servico
-      )
-    as media FROM avaliacao a GROUP BY id_servico
-  )
-WHERE media =
-  (
-    SELECT MIN(media) FROM
-      (
-        SELECT id_servico,
-          (
-            SELECT AVG(nota) FROM avaliacao WHERE id_servico = av.id_servico GROUP BY id_servico
-          )
-        as media FROM avaliacao av GROUP BY id_servico
+        avaliacao
       )
   )
 ;

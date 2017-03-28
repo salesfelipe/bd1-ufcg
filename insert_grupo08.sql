@@ -23,7 +23,7 @@ INSERT INTO dependente (          cpf,       titular,           nome            
 INSERT INTO funcionario (         cpf,           nome  , salario    ,              data_nasc            , funcao)
   SELECT                '20000000001', 'Funcionario 1',     10.1   ,TO_DATE('20/01/1998', 'dd/mm/yyyy'), 'Carregador' FROM dual
   UNION ALL SELECT      '20000000002', 'Funcionario 2',     11.2   ,TO_DATE('10/10/1975', 'dd/mm/yyyy'), 'Atendente'  FROM dual
-  UNION ALL SELECT      '20000000003', 'Funcionario 3',     12.3   ,TO_DATE('26/08/1970', 'dd/mm/yyyy'), 'Caixa'      FROM dual
+  UNION ALL SELECT      '20000000003', 'Funcionario 3',     3000   ,TO_DATE('26/08/1970', 'dd/mm/yyyy'), 'Caixa'      FROM dual
   UNION ALL SELECT      '20000000004', 'Funcionario 4',     13.4   ,TO_DATE('26/08/2005', 'dd/mm/yyyy'), 'Gerente'    FROM dual
   UNION ALL SELECT      '20000000005', 'Funcionario 5',     13.5   ,TO_DATE('26/08/2006', 'dd/mm/yyyy'), 'ADPT'       FROM dual
 
